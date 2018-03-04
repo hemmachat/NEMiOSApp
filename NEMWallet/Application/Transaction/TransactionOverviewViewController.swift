@@ -136,7 +136,7 @@ final class TransactionOverviewViewController: UIViewController {
     }
     
     /// Segues to the transaction send view controller.
-    func segueToTransactionSendViewController() {
+    @objc func segueToTransactionSendViewController() {
         performSegue(withIdentifier: "showTransactionSendViewController", sender: nil)
     }
     
@@ -165,13 +165,13 @@ final class TransactionOverviewViewController: UIViewController {
     fileprivate func updateInfoHeaderLabel(withAccountData accountData: AccountData?) {
         
         guard accountData != nil else {
-            infoHeaderLabel.attributedText = NSMutableAttributedString(string: "LOST_CONNECTION".localized(), attributes: [NSForegroundColorAttributeName : UIColor.red])
+            infoHeaderLabel.attributedText = NSMutableAttributedString(string: "LOST_CONNECTION".localized(), attributes: [NSAttributedStringKey.foregroundColor : UIColor.red])
             return
         }
         
         let infoHeaderText = NSMutableAttributedString(string: "\(self.account!.title) ·")
         let infoHeaderTextBalance = " \((accountData!.balance / 1000000).format()) XEM"
-        infoHeaderText.append(NSMutableAttributedString(string: infoHeaderTextBalance, attributes: [NSForegroundColorAttributeName: UIColor(red: 90.0/255.0, green: 179.0/255.0, blue: 232.0/255.0, alpha: 1), NSFontAttributeName: UIFont.systemFont(ofSize: infoHeaderLabel.font.pointSize, weight: UIFontWeightRegular)]))
+        infoHeaderText.append(NSMutableAttributedString(string: infoHeaderTextBalance, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: 90.0/255.0, green: 179.0/255.0, blue: 232.0/255.0, alpha: 1), NSAttributedStringKey.font: UIFont.systemFont(ofSize: infoHeaderLabel.font.pointSize, weight: UIFont.Weight.regular)]))
         
         infoHeaderLabel.attributedText = infoHeaderText
     }
@@ -212,7 +212,7 @@ final class TransactionOverviewViewController: UIViewController {
      
         - Parameter updateStatusBarButton: Bool whether the status bar button status should get updated or not.
     */
-    func refreshTransactionOverview(updateStatusBarButton: Bool = false) {
+    @objc func refreshTransactionOverview(updateStatusBarButton: Bool = false) {
         
         transactions = [Transaction]()
         

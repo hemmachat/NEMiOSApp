@@ -52,14 +52,14 @@ final class AccountAdditionMenuAddExistingAccountQRViewController: UIViewControl
         
         qrCodeScannerView.session = session
         
-        switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
         case .authorized:
             break
             
         case .notDetermined:
             
             sessionQueue.suspend()
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [unowned self] granted in
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [unowned self] granted in
                 if !granted {
                     self.setupResult = .notAuthorized
                 }
@@ -154,7 +154,7 @@ final class AccountAdditionMenuAddExistingAccountQRViewController: UIViewControl
         // Add video input.
         do {
             var defaultVideoDevice: AVCaptureDevice?
-            defaultVideoDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            defaultVideoDevice = AVCaptureDevice.default(for: AVMediaType.video)
             let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
             
             if session.canAddInput(videoDeviceInput) {
@@ -164,7 +164,7 @@ final class AccountAdditionMenuAddExistingAccountQRViewController: UIViewControl
                 DispatchQueue.main.async {
                     let initialVideoOrientation: AVCaptureVideoOrientation = .portrait
                     self.qrCodeScannerView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
-                    self.qrCodeScannerView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+                    self.qrCodeScannerView.videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 }
             } else {
                 print("Could not add video device input to the session")
@@ -183,7 +183,7 @@ final class AccountAdditionMenuAddExistingAccountQRViewController: UIViewControl
         if session.canAddOutput(metaDataOutput) {
             session.addOutput(metaDataOutput)
             metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metaDataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            metaDataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed
@@ -202,7 +202,7 @@ final class AccountAdditionMenuAddExistingAccountQRViewController: UIViewControl
         NotificationCenter.default.removeObserver(self)
     }
     
-    func sessionRuntimeError(notification: NSNotification) {
+    @objc func sessionRuntimeError(notification: NSNotification) {
         
         guard let errorValue = notification.userInfo?[AVCaptureSessionErrorKey] as? NSError else {
             return
@@ -257,12 +257,12 @@ extension AccountAdditionMenuAddExistingAccountQRViewController: AVCaptureMetada
     
     // MARK: - Capture Output Delegate
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
         for item in metadataObjects {
-            if let metadataObject = item as? AVMetadataMachineReadableCodeObject , metadataObject.type == AVMetadataObjectTypeQRCode {
+            if let metadataObject = item as? AVMetadataMachineReadableCodeObject , metadataObject.type == AVMetadataObject.ObjectType.qr {
                 
-                guard let encodedCaptureResult = metadataObject.stringValue.data(using: String.Encoding.utf8) else {
+                guard let encodedCaptureResult = metadataObject.stringValue?.data(using: String.Encoding.utf8) else {
                     return
                 }
                 

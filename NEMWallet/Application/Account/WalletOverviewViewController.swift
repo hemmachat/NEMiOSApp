@@ -178,7 +178,7 @@ final class WalletOverviewViewController: UIViewController {
     }
     
     /// Synchronizes the application time with the network time.
-    internal func refreshNetworkTime() {
+    @objc internal func refreshNetworkTime() {
         TimeManager.sharedInstance.synchronizeTime()
     }
     

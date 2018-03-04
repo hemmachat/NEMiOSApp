@@ -153,6 +153,7 @@
 		4FFF8F011D51D7E600B4BB9F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF8F001D51D7E600B4BB9F /* AccountModel.swift */; };
 		644160CB1EF8EA0B00534DB9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 644160CA1EF8EA0B00534DB9 /* Settings.bundle */; };
 		64F22B8D1EE67B9700780900 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F22B8C1EE67B9700780900 /* UIViewController+Additions.swift */; };
+		65F53443204BC101000A163A /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F53442204BC101000A163A /* SearchTextField.swift */; };
 		9809BE271B75008F0028D082 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9809BE291B75008F0028D082 /* Localizable.strings */; };
 		98BB95D31BCCED5B002151F7 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 98BB95B91BCCED5B002151F7 /* readme.md */; };
 		98BB95D41BCCED5B002151F7 /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 98BB95BB1BCCED5B002151F7 /* add_scalar.c */; };
@@ -356,6 +357,7 @@
 		4FFF8F001D51D7E600B4BB9F /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		644160CA1EF8EA0B00534DB9 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		64F22B8C1EE67B9700780900 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
+		65F53442204BC101000A163A /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		98019A4E1CAC1E4400C61638 /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		98019A4F1CAC270E00C61638 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		98019A501CAC28CB00C61638 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 			isa = PBXGroup;
 			children = (
 				4F0B5F081DAFD4A900E182C3 /* AutoCompleteTextField.swift */,
+				65F53442204BC101000A163A /* SearchTextField.swift */,
 			);
 			path = Textfields;
 			sourceTree = "<group>";
@@ -948,20 +951,20 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = NEM;
 				TargetAttributes = {
 					4F76D04E1F2657AD00D9694D = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = PNXDDDXH4F;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = DA3557FF1A39D3B900AFA5FD;
 					};
 					DA3557FF1A39D3B900AFA5FD = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = PNXDDDXH4F;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1120,6 +1123,7 @@
 				4F9F684E1D4C361F0086F98F /* MultisigAddCosignatoryViewController.swift in Sources */,
 				4F9F68481D4C360B0086F98F /* MultisigCosignatoryTableViewCell.swift in Sources */,
 				4F3ACEAF1D6451580056F234 /* Message+Additions.swift in Sources */,
+				65F53443204BC101000A163A /* SearchTextField.swift in Sources */,
 				4F9F67EA1D4C31080086F98F /* AppDelegate.swift in Sources */,
 				4F3ACE991D620B100056F234 /* TransactionModel.swift in Sources */,
 				4F9F683E1D4C35E30086F98F /* InvoiceAccountInfoViewController.swift in Sources */,
@@ -1257,7 +1261,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NEMWallet.app/NEMWallet";
 			};
 			name = Debug;
@@ -1282,7 +1287,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.nem.NEMWalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NEMWallet.app/NEMWallet";
 			};
 			name = Release;
@@ -1298,14 +1304,20 @@
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1352,14 +1364,20 @@
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1413,7 +1431,8 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NEMWallet/Assets/Supporting Files/NemIOSClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1443,7 +1462,8 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NEMWallet/Assets/Supporting Files/NemIOSClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
